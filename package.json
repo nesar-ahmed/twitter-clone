@@ -1,0 +1,17 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "Try to clone the twitter",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Nesar Ahmed",
+  "license": "ISC"
+}
