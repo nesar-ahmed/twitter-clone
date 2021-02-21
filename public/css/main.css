@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --btn-tweet: #0099ff;
+}
+
+a {
+  color: inherit;
+}
+
+.nav-top-icon {
+  display: block;
+  color: #0099ff;
+  padding: 10px;
+  text-align: center;
+}
+
+.nav-top-icon:hover {
+  color: #0a84d6;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: fit-content;
+  margin: 10px 0;
+}
+
+nav a {
+  font-size: 25px;
+  text-decoration: none;
+  padding: 5px 15px 0 15px;
+}
+
+nav a:hover {
+  color: #0099ff;
+  background-color: #0099ff2a;
+  border-radius: 25px;
+}
+
+nav a i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+nav span {
+  font-size: 18px;
+}
+
+.btn-tweet-link {
+  width: 80%;
+  margin: 25px auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: var(--btn-tweet);
+  border-radius: 25px;
+}
+
+.btn-tweet-link:hover {
+  color: #ffffff;
+  background-color: #0e90f9;
+}
+
+.profileInfo {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  width: 70px;
+  height: 60px;
+  border-radius: 50%;
+}

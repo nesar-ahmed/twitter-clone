@@ -1,6 +1,33 @@
 extends layouts/main.pug 
 
 block content
-  h1 Welcome to Twitter
+  .row.pt-1
+    .col-3
+      a.nav-top-icon(href="/")
+          i.fab.fa-twitter.fa-3x
+      // Navigation bar
+      include partials/navbar.pug
+      a.btn-tweet-link(href='/')  Tweet 
+      .profileInfo
+          img.avatar(src="https://www.drshaneholmes.com/wp-content/uploads/2020/03/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png", alt="profile")
+          .info 
+          h5 #{user.firstName} #{user.lastName}
+          p @#{user.userName}
+    .col-6
+      .card
+        .card-header.border-info.border-0
+          .d-flex.flex-row.justify-content-between.align-items-center
+            h4 Home
+            a.btn.btn-link(href='')
+              i.far.fa-star.fa-lg
+        .card-body
+          form(action="")
+            .form-floating
+              textarea#msg.form-control.border-0(placeholder='Leave a comment here' style='height: 100px')
+              label(for='msg') What's happening?
 
-  p #{userLoggedIn.firstName}
+    .col-3
+      form(action="")
+        input(type="text") 
+
+  p #{user.firstName}

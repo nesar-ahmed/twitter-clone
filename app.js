@@ -6,6 +6,7 @@ const middleware = require('./util/middleware');
 const connection = require('./util/database');
 
 const loginRoutes = require('./routes/loginRoutes');
+const logoutRoutes = require('./routes/logoutRoutes');
 const registerRoutes = require('./routes/registerRoutes');
 
 const app = express();
@@ -16,7 +17,7 @@ dotEnv.config();
 
 // Configure template engine
 app.set('view engine', 'pug');
-app.set('views', 'views')
+app.set('views', 'views');
 
 // Configure static files repository
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,28 +26,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 connection.connect();
 
 // Extract form data
-app.use(express.json())
-app.use(express.urlencoded({ extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Configure user session 
-app.use(expressSession({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: false,
-}))
+// Configure user session
+app.use(
+  expressSession({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+  })
+);
 
 // configure routes
-app.use('/login', loginRoutes)
-app.use('/register', registerRoutes)
+app.use('/login', loginRoutes);
+app.use('/logout', logoutRoutes);
+app.use('/register', registerRoutes);
 
-app.get('/', middleware.requireLogin ,(req,res) => {
+app.get('/', middleware.requireLogin, (req, res) => {
   const payload = {
     pageTitle: 'Home',
-    userLoggedIn: req.session.user,
-  }
+    user: req.session.user,
+  };
   res.status(200).render('home', payload);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

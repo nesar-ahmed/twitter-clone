@@ -17,37 +17,32 @@ router.post('/', async (req, res) => {
 
   let payload = req.body;
 
-  // Validate all input data are entered
-  if(firstName && lastName && userName && email && password && passwordConf ) {
+  // Validate all form data are entered
+  if (firstName && lastName && userName && email && password && passwordConf) {
     const user = await User.findOne({
       // check userName or email
-      $or: [
-        {userName: userName },
-        {email: email }
-      ]
-    })
+      $or: [{ userName: userName }, { email: email }],
+    });
 
-    if(!user) {
+    if (!user) {
       // no user found
       const data = req.body;
-      data.password = await bcrypt.hash(data.password, 10)
-      User.create(data)
-        .then(user => {
-          req.session.user = user;
-          return res.redirect('/');
-        })
+      data.password = await bcrypt.hash(data.password, 10);
+      User.create(data).then((user) => {
+        req.session.user = user;
+        return res.redirect('/');
+      });
     } else {
       // user found
-      if(email == user.email) {
-        payload.errorMessage = 'Email already in use.'
+      if (email == user.email) {
+        payload.errorMessage = 'Email already in use.';
       } else {
-        payload.errorMessage = 'Username already in use.'
+        payload.errorMessage = 'Username already in use.';
       }
       res.status(200).render('register', payload);
     }
-
   } else {
-    payload.errorMessage = "Make sure each field has a valid value"
+    payload.errorMessage = 'Make sure each field has a valid value';
     res.status(200).render('register', payload);
   }
 });
